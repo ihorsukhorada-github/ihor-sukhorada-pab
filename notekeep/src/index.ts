@@ -1,6 +1,6 @@
 import express, { Express, Request, Response } from "express"
 import jwt from "jsonwebtoken"
-import "dotenv/config"
+import { config } from "dotenv"
 import { readFileSync, writeFileSync } from "fs"
 
 import Note from './entity/Note'
@@ -10,9 +10,11 @@ import AuthMiddleware from "./middleware/AuthMiddleware"
 
 const app: Express = express();
 
+config()
+
 app.use(express.json())
 
-app.listen(3000);
+app.listen(process.env.PORT);
 
 class DataStorage {
     async readData(): Promise<void> {
